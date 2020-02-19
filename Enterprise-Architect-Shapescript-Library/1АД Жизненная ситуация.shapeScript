@@ -1,0 +1,114 @@
+shape main
+{
+	layouttype="border";
+	noshadow=true;
+	
+	if(hasproperty("rectanglenotation","0"))
+	{
+		// Иконочная нотация
+		defsize(90,45);
+		startpath();
+		moveto(0,100);
+		lineto(75,100);
+		arcto(50,0, 100,100, 75,100, 75,0);
+		lineto(75,0);	// arcto() appears to miss its target
+		lineto(0,0);
+		lineto(20,50);
+		lineto(0,100);
+		endpath();
+		fillandstrokepath();
+		startpath();
+		moveto(0,100);
+		lineto(75,100);
+		arcto(50,0, 100,100, 75,100, 75,0);
+		lineto(75,0);	// arcto() appears to miss its target
+		lineto(0,0);
+		lineto(20,50);
+		lineto(0,100);
+		endpath();
+		fillandstrokepath();
+		setfillcolor(255,192,160);
+		startpath();
+		moveto(67,105); // НЛ
+		lineto(60,70); // СЛ
+		lineto(80,55); // В
+		lineto(100,70); // СП
+		lineto(93,105); // НП
+		lineto(67,105); // НЛ
+		endpath();
+		fillandstrokepath();
+	}
+	else
+	{
+		// Прямоугольная нотация
+		defsize(100,70);
+		startpath();
+		roundrect(0,0, 100,100, 20,20); // Прямоугольник с закругленными углами
+		endpath();
+		fillandstrokepath();
+		
+		addsubshape("padding","n"); // Создание отступа для декорации
+		addsubshape("name","center");
+
+		shape padding
+		{
+			preferredheight=20;
+		}
+		
+		shape name
+		{
+			h_align="center";
+			print("#name#");
+		}
+	}
+}
+
+shape label
+{
+	setorigin("sw",0,0);
+
+	if(hasproperty("rectanglenotation","0"))
+	{
+		print("#name#");
+	}
+}
+
+decoration event
+{
+	orientation="ne";
+	
+	if(hasproperty("rectanglenotation","0"))
+	{
+	}
+	else
+	{
+		moveto(0,80);
+		lineto(75,80);
+		bezierto(100,70, 100,30, 75,20);
+		lineto(0,20);
+		lineto(20,50);
+		lineto(0,80);
+		setfillcolor(255,192,160);
+		startpath();
+		moveto(67,105); // НЛ
+		lineto(60,70); // СЛ
+		lineto(80,55); // В
+		lineto(100,70); // СП
+		lineto(93,105); // НП
+		lineto(67,105); // НЛ
+		endpath();
+		fillandstrokepath();
+	}
+}
+
+decoration composite
+{
+	orientation="SE";
+	if(hasproperty("iscomposite","true"))
+	{
+		ellipse(0,40,40,60);
+		ellipse(60,40,100,60);
+		moveto(30,50);
+		lineto(70,50);
+	}
+}

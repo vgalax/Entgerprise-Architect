@@ -1,0 +1,133 @@
+shape main
+{
+	layouttype="border";
+	noshadow=true;
+	
+	if(hasproperty("rectanglenotation","0"))
+	{
+		// Иконка
+		if(hastag("Тип сервиса","Сервис"))
+		{
+			defsize(90,45);
+			startpath();
+			moveto(25,100);
+			lineto(75,100);
+			arcto(50,0,100,100,75,100,75,0);
+			lineto(25,0);
+			arcto(0,0,50,100,25,0,25,100);
+			endpath();
+			fillandstrokepath();
+		}
+		if(hastag("Тип сервиса","Моносервис"))
+		{
+			defsize(90,45);
+			startpath();
+			moveto(25,100);
+			lineto(75,100);
+			arcto(50,0,100,100,75,100,75,0);
+			lineto(25,0);
+			arcto(0,0,50,100,25,0,25,100);
+			endpath();
+			fillandstrokepath();
+		}
+		if(hastag("Тип сервиса","Услуга партнера"))
+		{
+			defsize(90,45);
+			startpath();
+			moveto(25,100);
+			lineto(75,100);
+			arcto(50,0,100,100,75,100,75,0);
+			lineto(25,0);
+			arcto(0,0,50,100,25,0,25,100);
+			endpath();
+			fillandstrokepath();
+			// Буква П
+			moveto(40,90);
+			lineto(40,10);
+			lineto(60,10);
+			lineto(60,90);
+		}
+	}
+	else
+	{
+		// Прямоугольник
+		defsize(100,70);
+		roundrect(0,0,100,100,20,20); // Прямоугольник с закругленными углами
+
+		addsubshape("padding","n"); // Создание отступа для декорации
+		addsubshape("name","center");
+		
+		shape padding
+		{
+			preferredheight=20;
+		}
+		
+		shape name
+		{
+			h_align="center";
+			print("#name#");
+		}
+	}
+}
+
+shape label
+{
+	setorigin("sw",0,0);
+	if(hasproperty("rectanglenotation","0"))
+	{
+		print("#name#");
+	}
+}
+
+decoration business_service
+{
+	orientation="ne";
+	if(hasproperty("rectanglenotation","0"))
+	{
+	}
+	else
+	{
+		// Внимание!!! Декорация «Моносервиса» сжата в прямогоульнике!!! Не чистое копирование
+		if(hastag("Тип сервиса","Сервис"))
+		{
+			moveto(25,75);
+			lineto(75,75);
+			arcto(50,25,100,75,75,75,75,25);
+			lineto(25,25);
+			arcto(0,25,50,75,25,25,25,75);
+		}
+		if(hastag("Тип сервиса","Моносервис"))
+		{
+			moveto(25,75);
+			lineto(75,75);
+			arcto(50,25,100,75,75,75,75,25);
+			lineto(25,25);
+			arcto(0,25,50,75,25,25,25,75);
+		}
+		if(hastag("Тип сервиса","Услуга партнера"))
+		{
+			moveto(25,75);
+			lineto(75,75);
+			arcto(50,25,100,75,75,75,75,25);
+			lineto(25,25);
+			arcto(0,25,50,75,25,25,25,75);
+			// Буква П
+			moveto(40,70);
+			lineto(40,30);
+			lineto(60,30);
+			lineto(60,70);
+		}
+	}
+}
+
+decoration composite
+{
+	orientation="se";
+	if(hasproperty("iscomposite","true"))
+	{
+		ellipse(0,40, 40,60);
+		ellipse(60,40, 100,60);
+		moveto(30,50);
+		lineto(70,50);
+	}
+}

@@ -1,0 +1,69 @@
+shape main
+{
+	layouttype="border";
+	noshadow=true;
+	
+	if(hasproperty("rectanglenotation","0"))
+	{
+		// Иконка
+		defsize(90,45);
+		ellipse(0,0, 100,100); // Сплюснутый эллипс
+	}
+	else
+	{
+		// Прямоугольник
+		defsize(100,70);
+		rectangle(0,0, 100,100); // Чистый прямоугольник
+
+		addsubshape("padding","n"); // Создание отступа для декорации
+		addsubshape("name","center");
+		
+		shape padding
+		{
+			preferredheight=20;
+		}
+		
+		shape name
+		{
+			h_align="center";
+			print("#name#");
+		}
+	}
+}
+
+shape label
+{
+	setorigin("sw",0,0);
+
+	if(hasproperty("rectanglenotation","0"))
+	{
+		print("#name#");
+	}
+}
+
+decoration organization_structure
+{
+	orientation="ne";
+//	setorigin("ne", -25,5); // Смещение декорации для прямоугольника не выполняется!
+	
+	if(hasproperty("rectanglenotation","0"))
+	{
+	}
+	else
+	{
+		ellipse(0,25, 100,75);
+	}
+}
+
+decoration composite
+{
+	orientation="se";
+	if(hasproperty("iscomposite","true"))
+	{
+		// Три звена цепочки
+		ellipse(0,40, 40,60);
+		ellipse(60,40, 100,60);
+		moveto(30,50);
+		lineto(70,50);
+	}
+}
